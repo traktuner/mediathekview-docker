@@ -10,7 +10,7 @@ RUN \
 
 RUN apt-get update && \
     apt-get full-upgrade -y && \
-    apt-get install -y ffmpeg wget
+    apt-get install -y ffmpeg wget mediathekview
 
 RUN wget https://download.mediathekview.de/stabil/MediathekView-latest-linux.deb
 RUN apt-get install ./MediathekView-latest-linux.deb
