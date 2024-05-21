@@ -1,1 +1,17 @@
 FROM jlesage/baseimage-gui:ubuntu-22.04-v4
+
+ENV APP_NAME="MediathekView"
+ENV DISPLAY=:0
+
+# Generate and install favicons.
+RUN \
+    APP_ICON_URL=https://mediathekview.de/images/MediathekView.svg && \
+    install_app_icon.sh "$APP_ICON_URL"
+
+RUN apt-get update && apt-get upgrade -y \
+    apt-get install -y ffmpeg wget
+
+RUN wget https://download.mediathekview.de/stabil/MediathekView-latest-linux.deb
+RUN apt-get install ./MediathekView-latest-linux.deb
+
+COPY startapp.sh /startapp.sh
