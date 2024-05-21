@@ -8,7 +8,8 @@ RUN \
     APP_ICON_URL=https://mediathekview.de/images/MediathekView.svg && \
     install_app_icon.sh "$APP_ICON_URL"
 
-RUN apt-get update && apt-get upgrade -y \
+RUN apt-get update && \
+    apt-get full-upgrade -y && \
     apt-get install -y ffmpeg wget
 
 RUN wget https://download.mediathekview.de/stabil/MediathekView-latest-linux.deb
