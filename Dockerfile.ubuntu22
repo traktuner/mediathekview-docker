@@ -23,4 +23,4 @@ RUN wget --no-verbose https://download.mediathekview.de/stabil/MediathekView-lat
 
 # Copy startapp.sh and make it executable
 COPY startapp.sh /startapp.sh
-#RUN chmod 755 /startapp.sh
+RUN chmod 755 /startapp.sh
