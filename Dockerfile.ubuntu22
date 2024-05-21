@@ -22,5 +22,5 @@ RUN wget --no-verbose https://download.mediathekview.de/stabil/MediathekView-lat
 #    apt-get -y autoclean
 
 # Copy startapp.sh and make it executable
-#COPY startapp.sh /startapp.sh
+COPY startapp.sh /startapp.sh
 #RUN chmod 755 /startapp.sh
