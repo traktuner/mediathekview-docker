@@ -18,7 +18,7 @@ RUN wget --no-verbose https://download.mediathekview.de/stabil/MediathekView-lat
     rm -rf ./MediathekView-latest-linux.deb
 
 # Cleanup
-RUN apt-get -y autoremove &&
+RUN apt-get -y autoremove
 
 # Copy startapp.sh and make it executable
 COPY startapp.sh /startapp.sh
