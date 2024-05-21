@@ -10,7 +10,7 @@ RUN \
 
 RUN apt-get update && \
     apt-get full-upgrade -y && \
-    apt-get install -y ffmpeg wget
+    apt-get install -y ffmpeg wget mediathekview
 
 # Install MediathekView
 RUN wget --no-verbose https://download.mediathekview.de/stabil/MediathekView-latest-linux.deb && \
@@ -18,8 +18,8 @@ RUN wget --no-verbose https://download.mediathekview.de/stabil/MediathekView-lat
     rm -rf ./MediathekView-latest-linux.deb
 
 # Cleanup
-RUN apt-get -y autoremove && \
-    apt-get -y autoclean
+#RUN apt-get -y autoremove && \
+#    apt-get -y autoclean
 
 # Copy startapp.sh and make it executable
 COPY startapp.sh /startapp.sh
