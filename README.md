@@ -1,6 +1,9 @@
 # mediathekview-docker
 
-Run MediathekView inside Docker.
+Run MediathekView inside Docker. \
+Based on the fabulous project [MediathekView](https://github.com/mediathekview/MediathekView)
+
+
 
 ## Recommended volume mountpoints
 
