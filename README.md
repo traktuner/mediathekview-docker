@@ -36,3 +36,14 @@ Environment variables can be set by adding one or more arguments `-e "<VAR>=<VAL
 
 You can find the Docker image on GHCR: \
 `docker pull ghcr.io/traktuner/mediathekview-docker:ubuntu22`
+
+## Ports
+
+Here is the list of ports used by container.  They can be mapped to the host
+via the `-p <HOST_PORT>:<CONTAINER_PORT>` parameter.  The port number inside the
+container cannot be changed, but you are free to use any port on the host side.
+
+| Port | Mapping to host | Description |
+|------|-----------------|-------------|
+| 5800 | Mandatory | Port used to access the application's GUI via the web interface. |
+| 5900 | Optional | Port used to access the application's GUI via the VNC protocol.  Optional if no VNC client is used. |
