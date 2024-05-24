@@ -33,3 +33,6 @@ Environment variables can be set by adding one or more arguments `-e "<VAR>=<VAL
 | Tag | Description |
 |-----|-------------|
 | ubuntu22 | Latest stable version of the image based on ubuntu 22.04 LTS |
+
+You can find the Docker image on GHCR: \
+`docker pull ghcr.io/traktuner/mediathekview-docker:ubuntu22`
