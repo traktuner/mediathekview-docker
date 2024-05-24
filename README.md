@@ -1,4 +1,4 @@
-### mediathekview-docker
+# mediathekview-docker
 
 Run MediathekView inside Docker.
 
