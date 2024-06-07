@@ -53,8 +53,29 @@ jobs:
         with:
           images: ${{ env.IMAGE_NAME }}
 
-      - name: Build and push Docker image
-        id: build-and-push
+      - name: Cache Docker layers
+        uses: actions/cache@v3
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+
+      - name: Build Docker image
+        id: build
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile.${{ matrix.dockerfile }}
+          push: false
+          platforms: linux/amd64
+          tags: ${{ env.IMAGE_NAME }}:${{ matrix.dockerfile }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache
+
+      - name: Push Docker image
+        if: github.event_name != 'pull_request'
         uses: docker/build-push-action@v5
         with:
           context: .
@@ -63,3 +84,5 @@ jobs:
           platforms: linux/amd64
           tags: ${{ env.IMAGE_NAME }}:${{ matrix.dockerfile }}
           labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache
