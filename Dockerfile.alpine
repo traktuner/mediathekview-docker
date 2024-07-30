@@ -1,0 +1,43 @@
+FROM jlesage/baseimage-gui:alpine-3.20-v4.6.3
+
+ENV APP_NAME="MediathekView"
+ENV DISPLAY=:0
+
+# Generate and install favicons
+RUN \
+    APP_ICON_URL=https://mediathekview.de/images/MediathekView.svg && \
+    install_app_icon.sh "$APP_ICON_URL"
+
+RUN apk update && \
+    apk add --no-cache openjdk11 ffmpeg&& \
+    apt-get install -y ffmpeg curl tar bash
+
+# Set the environment variables for Java
+ENV JAVA_VERSION=jdk-20
+ENV JAVA_HOME=/usr/lib/jvm/java-20-openjdk
+
+# Download and install OpenJDK 20
+RUN mkdir /usr/lib/jvm && \
+    curl -L -o /tmp/openjdk.tar.gz "https://download.oracle.com/java/20/latest/jdk-20_linux-x64_bin.tar.gz" && \
+    tar -xzf /tmp/openjdk.tar.gz -C /usr/lib/jvm && \
+    mv /usr/lib/jvm/jdk-20 /usr/lib/jvm/java-20-openjdk && \
+    rm /tmp/openjdk.tar.gz
+
+# Set PATH
+ENV PATH="$JAVA_HOME/bin:$PATH"
+
+# Verify the Java installation
+RUN java -version
+
+# Download and extract MediathekView
+RUN curl -L -o /tmp/MediathekView-latest-linux.tar.gz "https://download.mediathekview.de/stabil/MediathekView-latest-linux.tar.gz" && \
+    tar -xzf /tmp/MediathekView-latest-linux.tar.gz -C /opt && \
+    rm /tmp/MediathekView-latest-linux.tar.gz
+
+# Make the installation script executable and run it
+RUN chmod +x /opt/MediathekView/mediathekview.sh && \
+    ln -s /opt/MediathekView/mediathekview.sh /usr/bin/mediathekview
+
+# Copy startapp.sh and make it executable
+COPY /rootfs /
+RUN chmod 755 /startapp.sh
