@@ -28,12 +28,10 @@ jobs:
       id-token: write
     strategy:
       matrix:
-        dockerfile: [ubuntu22, alpine]
+        dockerfile: [ubuntu22]
         include:
           - dockerfile: ubuntu22
             tags: ubuntu22
-          - dockerfile: alpine
-            tags: alpine
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
