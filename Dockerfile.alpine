@@ -24,7 +24,7 @@ RUN java -version
 # Download and install OpenJDK 20
 RUN curl -L -o /tmp/MediathekView-latest-linux.tar.gz "https://download.mediathekview.de/stabil/MediathekView-latest-linux.tar.gz" && \
     tar -xzf /tmp/MediathekView-latest-linux.tar.gz && \
-    mv MediathekView / opt/MediathekView
+    mv /tmp/MediathekView / opt/MediathekView
 RUN chmod +x /opt/MediathekView/MediathekView
 
 # Copy startapp.sh and make it executable
