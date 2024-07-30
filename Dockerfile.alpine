@@ -16,15 +16,15 @@ RUN apk update && \
     apk add --no-cache bash
 
 # Set the environment variables for Java
-ENV JAVA_VERSION=jdk-20
-ENV JAVA_HOME=/usr/lib/jvm/java-20-openjdk
+ENV JAVA_VERSION=jdk-21
+ENV JAVA_HOME=/usr/lib/jvm/java-21-openjdk
 
 # Download and install OpenJDK 20
-RUN mkdir /usr/lib/jvm && \
-    curl -L -o /tmp/openjdk.tar.gz "https://download.oracle.com/java/20/latest/jdk-20_linux-x64_bin.tar.gz" && \
-    tar -xzf /tmp/openjdk.tar.gz -C /usr/lib/jvm && \
-    mv /usr/lib/jvm/jdk-20 /usr/lib/jvm/java-20-openjdk && \
-    rm /tmp/openjdk.tar.gz
+#RUN mkdir /usr/lib/jvm && \
+#    curl -L -o /tmp/openjdk.tar.gz "https://download.oracle.com/java/20/latest/jdk-20_linux-x64_bin.tar.gz" && \
+#    tar -xzf /tmp/openjdk.tar.gz -C /usr/lib/jvm && \
+#    mv /usr/lib/jvm/jdk-20 /usr/lib/jvm/java-20-openjdk && \
+#    rm /tmp/openjdk.tar.gz
 
 # Set PATH
 ENV PATH="$JAVA_HOME/bin:$PATH"
