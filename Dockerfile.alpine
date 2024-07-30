@@ -21,24 +21,12 @@ RUN apk update && \
 RUN which java
 RUN java -version
 
-# Set the environment variables for Java
-#ENV JAVA_VERSION=jdk-21
-#ENV JAVA_HOME=/opt/java/current
-#ENV PATH=$PATH:$JAVA_HOME/bin
-
 # Download and install OpenJDK 20
-#RUN mkdir /usr/lib/jvm && \
-#    curl -L -o /tmp/openjdk.tar.gz "https://download.oracle.com/java/20/latest/jdk-20_linux-x64_bin.tar.gz" && \
-#    tar -xzf /tmp/openjdk.tar.gz -C /usr/lib/jvm && \
-#    mv /usr/lib/jvm/jdk-20 /usr/lib/jvm/java-20-openjdk && \
-#    rm /tmp/openjdk.tar.gz
+RUN mkdir /usr/lib/jvm && \
+    curl -L -o /tmp/MediathekView-latest-linux.tar.gz "https://download.mediathekview.de/stabil/MediathekView-latest-linux.tar.gz" && \
+    tar -xzf /tmp/MediathekView-latest-linux.tar.gz
 
-# Download MediathekView
-RUN curl -L -o /tmp/MediathekView-latest-linux.sh "https://download.mediathekview.de/stabil/MediathekView-latest-linux.sh"
-
-# Make the installation script executable and run it
-RUN chmod +x /tmp/MediathekView-latest-linux.sh
-RUN /tmp/MediathekView-latest-linux.sh
+RUN chmod +x /tmp/MediathekView
 
 # Copy startapp.sh and make it executable
 COPY /rootfs /
