@@ -21,7 +21,7 @@ RUN curl -L -o /tmp/MediathekView-latest-linux.tar.gz "https://download.mediathe
     mv /tmp/MediathekView /opt/MediathekView
 RUN chmod +x /opt/MediathekView/MediathekView
 
-ENV INSTALL4J_JAVA_HOME=/opt/MediathekView/MediathekView/jre/bin
+ENV INSTALL4J_JAVA_HOME=/opt/MediathekView/jre/bin
 
 # Copy startapp.sh and make it executable
 COPY /rootfs /
