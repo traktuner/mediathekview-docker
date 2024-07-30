@@ -9,23 +9,19 @@ RUN \
     install_app_icon.sh "$APP_ICON_URL"
 
 RUN apk update && \
-    apk add --no-cache openjdk21 && \
-    apk add --no-cache openjdk21-jre && \
     apk add --no-cache ffmpeg && \
     apk add --no-cache curl && \
     apk add --no-cache tar && \
     apk add --no-cache gzip && \
     apk add --no-cache bash
 
-# Verify the Java installation
-RUN which java
-RUN java -version
-
 # Download and install MediathekView
 RUN curl -L -o /tmp/MediathekView-latest-linux.tar.gz "https://download.mediathekview.de/stabil/MediathekView-latest-linux.tar.gz" && \
     tar -xzf /tmp/MediathekView-latest-linux.tar.gz -C /tmp && \
     mv /tmp/MediathekView /opt/MediathekView
 RUN chmod +x /opt/MediathekView/MediathekView
+
+ENV INSTALL4J_JAVA_HOME=/opt/MediathekView/MediathekView/jre/bin
 
 # Copy startapp.sh and make it executable
 COPY /rootfs /
