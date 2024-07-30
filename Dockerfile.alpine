@@ -2,6 +2,7 @@ FROM jlesage/baseimage-gui:alpine-3.20-v4.6.3
 
 ENV APP_NAME="MediathekView"
 ENV DISPLAY=:0
+ENV INSTALL4J_JAVA_HOME=/usr/bin/java
 
 # Generate and install favicons
 RUN \
@@ -22,7 +23,6 @@ RUN curl -L -o /tmp/MediathekView-latest-linux.tar.gz "https://download.mediathe
     mv /tmp/MediathekView /opt/MediathekView
 RUN chmod +x /opt/MediathekView/MediathekView
 
-ENV INSTALL4J_JAVA_HOME=/usr/bin/java
 
 # Copy startapp.sh and make it executable
 COPY /rootfs /
