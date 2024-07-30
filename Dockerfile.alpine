@@ -10,14 +10,21 @@ RUN \
 
 RUN apk update && \
     apk add --no-cache openjdk21 && \
+    apk add --no-cache openjdk21-jre && \
     apk add --no-cache ffmpeg && \
     apk add --no-cache curl && \
     apk add --no-cache tar && \
+    apk add --no-cache gzip && \
     apk add --no-cache bash
 
+# Verify the Java installation
+RUN which java
+RUN java -version
+
 # Set the environment variables for Java
-ENV JAVA_VERSION=jdk-21
-ENV JAVA_HOME=/usr/lib/jvm/java-21-openjdk
+#ENV JAVA_VERSION=jdk-21
+#ENV JAVA_HOME=/opt/java/current
+#ENV PATH=$PATH:$JAVA_HOME/bin
 
 # Download and install OpenJDK 20
 #RUN mkdir /usr/lib/jvm && \
@@ -25,13 +32,6 @@ ENV JAVA_HOME=/usr/lib/jvm/java-21-openjdk
 #    tar -xzf /tmp/openjdk.tar.gz -C /usr/lib/jvm && \
 #    mv /usr/lib/jvm/jdk-20 /usr/lib/jvm/java-20-openjdk && \
 #    rm /tmp/openjdk.tar.gz
-
-# Set PATH
-ENV PATH="$JAVA_HOME/bin:$PATH"
-ENV INSTALL4J_JAVA_HOME="/usr/lib/jvm/java-21-openjdk"
-
-# Verify the Java installation
-RUN java -version
 
 # Download MediathekView
 RUN curl -L -o /tmp/MediathekView-latest-linux.sh "https://download.mediathekview.de/stabil/MediathekView-latest-linux.sh"
