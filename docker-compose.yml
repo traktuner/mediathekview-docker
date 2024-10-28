@@ -1,0 +1,17 @@
+services:
+  mediathekview:
+    container_name: mediathekview
+    restart: on-failure
+    image: ghcr.io/traktuner/mediathekview-docker:latest
+    volumes:
+      - "< path to your local mediathekview config folder >:/config:rw"
+      - "< path to your local mediathekview config folder >:/root:rw" # needed to keep settings permanent
+      - "< path to your local mediathekview download folder >:/media:rw"
+    environment:
+      - TZ=Europe/Vienna
+      - KEEP_APP_RUNNING=1
+      - USER_ID=0
+      - GROUP_ID=0
+    ports:
+      - 5900:5900 # access via VNC
+      - 5802:5800 # access via webbrowser
