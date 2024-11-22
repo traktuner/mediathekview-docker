@@ -1,6 +1,5 @@
-#!/bin/sh
+#!/usr/bin/env sh
+
 export HOME=/config
 
-/bin/sh -c MediathekView
-
-sleep infinity
+exec /usr/local/bin/MediathekView
