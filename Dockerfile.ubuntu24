@@ -5,7 +5,7 @@ ENV DISPLAY=:0
 
 # Generate and install favicons
 RUN \
-    APP_ICON_URL=https://mediathekview.de/images/MediathekView.svg && \
+    APP_ICON_URL=https://avatars.githubusercontent.com/u/23032665 && \
     install_app_icon.sh "$APP_ICON_URL"
 
 RUN apt-get update && \
