@@ -2,4 +2,11 @@
 
 export HOME=/config
 
-exec /usr/local/bin/MediathekView
+exec java \
+  -XX:+UseShenandoahGC \
+  -XX:ShenandoahGCHeuristics=compact \
+  -XX:+UseStringDeduplication \
+  -XX:MaxRAMPercentage=75.0 \
+  --add-opens=java.desktop/sun.awt.X11=ALL-UNNAMED \
+  -Duser.home=/config \
+  -jar /opt/MediathekView/MediathekView.jar
