@@ -32,8 +32,9 @@ Environment variables can be set by adding one or more arguments `-e "<VAR>=<VAL
 
 | Tag | Description |
 |-----|-------------|
-| latest | Latest stable version of the image based on ubuntu 24.04 LTS |
-| ubuntu24 | Latest stable version of the image based on ubuntu 24.04 LTS |
+| versioned | Versioned stable releases based on ubuntu 24.04 LTS |
+| latest | Automatic build of the master branch (may be unstable) based on ubuntu 24.04 LTS |
+| ubuntu24 | Automatic build of the master branch (may be unstable) based on ubuntu 24.04 LTS |
 
 You can find the Docker image on GHCR: \
 `docker pull ghcr.io/traktuner/mediathekview-docker:latest`
