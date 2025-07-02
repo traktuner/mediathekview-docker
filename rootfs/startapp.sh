@@ -9,4 +9,4 @@ exec java \
   -XX:MaxRAMPercentage=75.0 \
   --add-opens=java.desktop/sun.awt.X11=ALL-UNNAMED \
   -Duser.home=/config \
-  -jar /opt/MediathekView/MediathekView.jar
+  -jar /usr/share/mediathekview/MediathekView.jar
