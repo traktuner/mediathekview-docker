@@ -10,16 +10,11 @@ RUN \
 
 RUN apt-get update && \
     apt-get full-upgrade -y && \
-    apt-get install -y ffmpeg wget software-properties-common
+    apt-get install -y ffmpeg wget software-properties-common mediathekview
 
 # Install Java 23
 RUN add-apt-repository ppa:openjdk-r/ppa && \
     apt-get install -y openjdk-23-jre
-
-# Install MediathekView
-RUN wget --no-verbose https://download.mediathekview.de/stabil/MediathekView-latest-linux.deb && \
-    apt-get install -y ./MediathekView-latest-linux.deb && \
-    rm -rf ./MediathekView-latest-linux.deb
 
 # Cleanup
 RUN apt-get -y autoclean
