@@ -1,7 +1,7 @@
 services:
   mediathekview:
     container_name: mediathekview
-    restart: on-failure
+    restart: unless-stopped
     image: ghcr.io/traktuner/mediathekview-docker:<tag>
     volumes:
       - "< path to your local mediathekview config folder >:/config:rw"
@@ -12,6 +12,34 @@ services:
       - KEEP_APP_RUNNING=1
       - USER_ID=0
       - GROUP_ID=0
+      - CLEAN_TMP_DIR=1
+      - SECURE_CONNECTION=1
+      - VNC_PASSWORD=your_secure_password_here
     ports:
-      - 5900:5900 # access via VNC
-      - 5800:5800 # access via webbrowser
+      - "5900:5900" # access via VNC
+      - "5800:5800" # access via webbrowser
+    # Resource limits for better performance
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+          cpus: '1.0'
+        reservations:
+          memory: 512M
+          cpus: '0.5'
+    # Security improvements
+    security_opt:
+      - no-new-privileges:true
+    # Health check
+    healthcheck:
+      test: ["CMD", "pgrep", "java"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    # Logging configuration
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"

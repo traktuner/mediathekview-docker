@@ -8,17 +8,30 @@ RUN \
     APP_ICON_URL=https://avatars.githubusercontent.com/u/23032665 && \
     install_app_icon.sh "$APP_ICON_URL"
 
+# Install all dependencies in a single layer to reduce image size
 RUN apt-get update && \
     apt-get full-upgrade -y && \
-    apt-get install -y ffmpeg wget software-properties-common mediathekview
-
-# Install Java 23
-RUN add-apt-repository ppa:openjdk-r/ppa && \
-    apt-get install -y openjdk-23-jre
-
-# Cleanup
-RUN apt-get -y autoclean
+    apt-get install -y --no-install-recommends \
+        ffmpeg \
+        wget \
+        software-properties-common \
+        mediathekview && \
+    # Install Java 23
+    add-apt-repository ppa:openjdk-r/ppa && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends openjdk-23-jre && \
+    # Cleanup to reduce image size
+    apt-get -y autoclean && \
+    apt-get -y autoremove && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Copy startapp.sh and make it executable
 COPY rootfs/ /
 RUN chmod +x /startapp.sh
+
+# Set working directory
+WORKDIR /config
+
+# Add healthcheck
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD pgrep java || exit 1
