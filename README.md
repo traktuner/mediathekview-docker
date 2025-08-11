@@ -37,7 +37,7 @@ Environment variables can be set by adding one or more arguments `-e "<VAR>=<VAL
 | ubuntu24 | Automatic build of the master branch (may be unstable) based on ubuntu 24.04 LTS |
 
 You can find the Docker image on GHCR: \
-`docker pull ghcr.io/traktuner/mediathekview-docker:latest`
+`docker pull ghcr.io/traktuner/mediathekview-docker:<tag>>`
 
 ## Ports
 

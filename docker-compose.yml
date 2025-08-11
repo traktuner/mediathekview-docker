@@ -2,7 +2,7 @@ services:
   mediathekview:
     container_name: mediathekview
     restart: on-failure
-    image: ghcr.io/traktuner/mediathekview-docker:latest
+    image: ghcr.io/traktuner/mediathekview-docker:<tag>
     volumes:
       - "< path to your local mediathekview config folder >:/config:rw"
       - "< path to your local mediathekview config folder >:/root:rw" # needed to keep settings permanent
