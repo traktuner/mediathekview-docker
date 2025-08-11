@@ -1,5 +1,11 @@
 FROM jlesage/baseimage-gui:ubuntu-24.04-v4.9.0
 
+LABEL org.opencontainers.image.title="MediathekView Docker"
+LABEL org.opencontainers.image.description="Run MediathekView inside Docker with GUI support via VNC and web browser"
+LABEL org.opencontainers.image.vendor="traktuner"
+LABEL org.opencontainers.image.source="https://github.com/traktuner/mediathekview-docker"
+LABEL org.opencontainers.image.licenses="GPL-3.0"
+
 ENV APP_NAME="MediathekView"
 ENV DISPLAY=:0
 
