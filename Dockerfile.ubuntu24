@@ -1,4 +1,4 @@
-FROM jlesage/baseimage-gui:ubuntu-24.04-v4.9.0
+FROM jlesage/baseimage-gui:ubuntu-24.04-v4.10
 
 LABEL org.opencontainers.image.title="MediathekView Docker"
 LABEL org.opencontainers.image.description="Run MediathekView inside Docker with GUI support via VNC and web browser"
