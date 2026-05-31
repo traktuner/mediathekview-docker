@@ -10,7 +10,10 @@ ENV APP_NAME="MediathekView"
 ENV DISPLAY=:0
 
 # Generate and install favicons
+# install_app_icon.sh apt-installs imagemagick, which pulls systemd transitively;
+# create the /var/log -> /config/log target first so its postinst doesn't fail.
 RUN \
+    mkdir -p /config/log && \
     APP_ICON_URL=https://avatars.githubusercontent.com/u/23032665 && \
     install_app_icon.sh "$APP_ICON_URL"
 
