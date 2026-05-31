@@ -15,7 +15,11 @@ RUN \
     install_app_icon.sh "$APP_ICON_URL"
 
 # Install all dependencies in a single layer to reduce image size
-RUN apt-get update && \
+# The base image symlinks /var/log -> /config/log, which is a dangling link at
+# build time. Create the target so systemd's postinst (pulled in via dbus) can
+# configure without failing on `mkdir /var/log`.
+RUN mkdir -p /config/log && \
+    apt-get update && \
     apt-get full-upgrade -y && \
     apt-get install -y --no-install-recommends \
         ffmpeg \
