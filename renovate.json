@@ -5,6 +5,11 @@
   ],
   "packageRules": [
     {
+      "description": "Pin jlesage/baseimage-gui to v4.11.x: v4.12 (base 3.11 read-only-fs rework) breaks build-time apt installs that create users/services. Revisit when upstream supports it again.",
+      "matchDepNames": ["jlesage/baseimage-gui"],
+      "allowedVersions": "/^ubuntu-24\\.04-v4\\.11\\./"
+    },
+    {
       "matchUpdateTypes": ["minor", "patch"],
       "automerge": true,
       "automergeType": "pr"

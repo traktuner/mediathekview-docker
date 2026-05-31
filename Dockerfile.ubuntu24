@@ -1,4 +1,10 @@
-FROM jlesage/baseimage-gui:ubuntu-24.04-v4.12.2
+# Pinned to v4.11.x: baseimage v4.12 bumped the underlying jlesage/baseimage to
+# 3.11, whose read-only-filesystem rework turns /run, /var/log and
+# /etc/{passwd,group,shadow} into runtime-only symlinks. That breaks build-time
+# apt installs of packages that create users / configure services (mediathekview
+# pulls dbus -> adduser -> needs /run, systemd). v4.11.3 (base 3.10.5) predates
+# this. Revisit when upstream supports build-time package installs again.
+FROM jlesage/baseimage-gui:ubuntu-24.04-v4.11.3
 
 LABEL org.opencontainers.image.title="MediathekView Docker"
 LABEL org.opencontainers.image.description="Run MediathekView inside Docker with GUI support via VNC and web browser"
@@ -10,19 +16,12 @@ ENV APP_NAME="MediathekView"
 ENV DISPLAY=:0
 
 # Generate and install favicons
-# install_app_icon.sh apt-installs imagemagick, which pulls systemd transitively;
-# create the /var/log -> /config/log target first so its postinst doesn't fail.
 RUN \
-    mkdir -p /config/log && \
     APP_ICON_URL=https://avatars.githubusercontent.com/u/23032665 && \
     install_app_icon.sh "$APP_ICON_URL"
 
 # Install all dependencies in a single layer to reduce image size
-# The base image symlinks /var/log -> /config/log, which is a dangling link at
-# build time. Create the target so systemd's postinst (pulled in via dbus) can
-# configure without failing on `mkdir /var/log`.
-RUN mkdir -p /config/log && \
-    apt-get update && \
+RUN apt-get update && \
     apt-get full-upgrade -y && \
     apt-get install -y --no-install-recommends \
         ffmpeg \
