@@ -4,7 +4,7 @@
 # apt installs of packages that create users / configure services (mediathekview
 # pulls dbus -> adduser -> needs /run, systemd). v4.11.3 (base 3.10.5) predates
 # this. Revisit when upstream supports build-time package installs again.
-FROM jlesage/baseimage-gui:ubuntu-24.04-v4.11.3
+FROM jlesage/baseimage-gui:ubuntu-24.04-v4.14.0
 
 LABEL org.opencontainers.image.title="MediathekView Docker"
 LABEL org.opencontainers.image.description="Run MediathekView inside Docker with GUI support via VNC and web browser"
